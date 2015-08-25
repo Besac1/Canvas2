@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
             Physics(function(world){
 
-              var viewWidth = 1080;
-              var viewHeight = 720;
+              var viewWidth = window.innerWidth;
+              var viewHeight = window.innerHeight;
 
               var renderer = Physics.renderer('canvas', {
                 el: 'viewport',
@@ -33,10 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 styles: {
                     // set colors for the circle bodies
                     'circle' : {
-                        strokeStyle: '#351024',
+                        strokeStyle: '#000',
                         lineWidth: 1,
-                        fillStyle: '#d33682',
-                        angleIndicator: '#351024'
+                        fillStyle: '#000'
                     }
                 }
               });
@@ -47,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
               world.on('step', function(){
                 world.render();
               });
+
+              console.log(window.innerWidth);
 
               // bounds of the window
               var viewportBounds = Physics.aabb(0, 0, viewWidth, viewHeight);
@@ -61,9 +62,29 @@ document.addEventListener('DOMContentLoaded', function () {
               // add a circle
               world.add(
                   Physics.body('circle', {
-                    x: 50, // x-coordinate
+                    x: 550, // x-coordinate
                     y: 30, // y-coordinate
                     vx: 0.5, // velocity in x-direction
+                    vy: 0.01, // velocity in y-direction
+                    radius: 20
+                  })
+              );
+
+              world.add(
+                  Physics.body('circle', {
+                    x: 100, // x-coordinate
+                    y: 200, // y-coordinate
+                    vx: 0.2, // velocity in x-direction
+                    vy: 0.41, // velocity in y-direction
+                    radius: 20
+                  })
+              );
+
+              world.add(
+                  Physics.body('circle', {
+                    x: 50, // x-coordinate
+                    y: 30, // y-coordinate
+                    vx: 0.1, // velocity in x-direction
                     vy: 0.01, // velocity in y-direction
                     radius: 20
                   })
